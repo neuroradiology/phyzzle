@@ -13,9 +13,11 @@ Great for classic platformers, shooters, prototyping, jams and learning.
 - MIT License
 - Simple :)
 
-## Example App
+## Example LÖVE App
 
 Use WASD to move.
+
+![](screenshots/love.png)
 
 ## Upcoming Features
 

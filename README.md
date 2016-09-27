@@ -1,5 +1,7 @@
 
-# phyzzle 0.1
+# Phyzzle
+
+**Version 0.1**
 
 Simple 2D AABB arcade physics system for Lua and LÖVE.
 

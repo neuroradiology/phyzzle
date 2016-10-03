@@ -1,6 +1,8 @@
 
 -- An example/debug renderer.
 
+local color = require('color')
+
 local Renderer = {
   -- camera position
   x = 0,
@@ -18,6 +20,7 @@ function Renderer:new(o)
 end
 
 function Renderer:init()
+  love.graphics.setBackgroundColor(unpack(color.black))
 end
 
 function Renderer:draw()
@@ -29,23 +32,28 @@ function Renderer:draw()
   for x = 0, self.map.zw - 1 do
     for y = 0, self.map.zh - 1 do
 
+      -- zone
+      love.graphics.setLineWidth(2)
+      love.graphics.setColor(unpack(color.red))
+      love.graphics.rectangle('line', x * self.map.zs, y * self.map.zs,
+        self.map.zs, self.map.zs)
+
       -- entities
+      love.graphics.setLineWidth(4)
+
       for k, entity in pairs(self.map.zones[x][y]) do
         if entity.static then
-          love.graphics.setColor(100,  100, 100)
+          love.graphics.setColor(unpack(color.dark_green))
         else
-          love.graphics.setColor(255, 255, 255)
+          love.graphics.setColor(unpack(color.blue))
         end
 
         love.graphics.rectangle('line', entity.x, entity.y, entity.w, entity.h)
       end
 
-      -- zone
-      love.graphics.setColor(200, 100, 100)
-      love.graphics.rectangle('line', x * self.map.zs, y * self.map.zs,
-        self.map.zs, self.map.zs)
-
       -- zone stats
+      love.graphics.setColor(unpack(color.white))
+
       local entityCount = 0
 
       for k, v in pairs(self.map.zones[x][y]) do

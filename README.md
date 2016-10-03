@@ -23,7 +23,6 @@ Use WASD to move.
 
 ## Upcoming Features
 
-- Collision groups: Specify entity types to collide with
 - Example PICO-8 Renderer
 
 ## License

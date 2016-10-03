@@ -9,6 +9,12 @@ local map, renderer
 function love.load(arg)
   love.graphics.setDefaultFilter('linear', 'nearest', 1)
 
+  local chars = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  chars = chars .. "0123456789.,!?-+/():;%&`'*#=[]\""
+
+  font = love.graphics.newImageFont('content/font.png', chars)
+  love.graphics.setFont(font)
+
   map = Map:new{ w = 800, h = 600, zs = 200 }
   renderer = Renderer:new{ map = map }
 

@@ -23,6 +23,8 @@ Use WASD to move.
 
 ## Upcoming Features
 
+- Entity "collides" with other entities flag
+- Entity is "collidable" from other entities flag
 - Example PICO-8 Renderer
 
 ## License

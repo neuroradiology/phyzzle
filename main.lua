@@ -25,8 +25,8 @@ function love.load(arg)
   map:add(Entity:new { x = 780, y = 20, w = 20, h = 560, static = true })
 
   -- boxes
-  map:add(Entity:new { x = 200, y = 450, w = 100, h = 100 })
-  map:add(Entity:new { x = 500, y = 300, w = 200, h = 50 })
+  map:add(Entity:new { x = 200, y = 400, w = 100, h = 100 })
+  map:add(Entity:new { x = 300, y = 275, w = 400, h = 50 })
 
   map:add(Player:new { x = 100, y = 100, w = 32, h = 32 })
 

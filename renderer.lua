@@ -39,7 +39,7 @@ function Renderer:draw()
         self.map.zs, self.map.zs)
 
       -- entities
-      love.graphics.setLineWidth(4)
+      love.graphics.setLineWidth(2)
 
       for k, entity in pairs(self.map.zones[x][y]) do
         if entity.static then

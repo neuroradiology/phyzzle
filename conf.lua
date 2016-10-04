@@ -3,7 +3,7 @@ function love.conf(t)
   t.identity = 'phyzzle'
   t.version = '0.10.1'
   t.console = true
-  t.window.title = 'Phyzzle 0.2'
+  t.window.title = 'Phyzzle v1.0.0'
   t.window.icon = nil
   t.window.width = 1024
   t.window.height = 768

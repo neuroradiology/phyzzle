@@ -1,5 +1,5 @@
 
-# Phyzzle v1.0.0
+# Phyzzle v2.0.0
 
 Simple 2D AABB arcade physics system for Lua and LÖVE.
 
@@ -15,14 +15,16 @@ Great for classic platformers, shooters, prototyping, jams and learning.
 
 ## Example LÖVE App
 
-Use WASD to move.
+Use AD to move W to jump.
 
-![](screenshots/love.png)
+![](media/love.png)
 
 ## Upcoming Features
 
 - Stickies: attach entities to others to move with them.
   Great for complex entities, lifts and platforms.
+- Circle collision detection (no resolution planned).
+  Useful for triggers.
 - Example PICO-8 Renderer
 
 ## Usage
@@ -86,34 +88,47 @@ end
 function Player:update(dt)
   -- check for keypresses or update via AI
   -- example usage of moving entity in the map and checking for collisions
-  self.map:move(self, self.x + (400 * dt), self.y + (400 * dt))
+  self.map:move(self, 400 * dt, 400 * dt)
 end
 
 -- acceleration variables xa, ya are zeroed on collision
 -- but you don't have to use them if you don't want
-function Entity:collision(e2, nx, ny, direction)
-  if direction == self.map.UP then
+function Entity:collision(e2, dx, dy)
+  if dy < 0 then
     self.y = e2.y + e2.h
     self.ya = 0
-  elseif direction == self.map.DOWN then
+  elseif dy > 0 then
     self.y = e2.y - self.h
     self.ya = 0
-  elseif direction == self.map.LEFT then
+  elseif dx < 0 then
     self.x = e2.x + e2.w
     self.xa = 0
-  elseif direction == self.map.RIGHT then
+  elseif dx > 0 then
     self.x = e2.x - self.w
     self.xa = 0
   end
 end
 
 -- no collision so update the position to the new location
-function Entity:move(nx, ny)
-  self.x = nx
-  self.y = ny
+function Entity:move(dx, dy)
+  self.x = self.x + dx
+  self.y = self.y + dy
 end
 
 ```
+
+## Changelog
+
+### v2.0.0 (in development)
+
+- Added changelog
+- Map:move takes change to position instead of new position
+- Improved example app with platforms
+- Improved documentation with Lua doc
+
+### v1.0.0
+
+- First release
 
 ## License
 

@@ -46,9 +46,10 @@ function Renderer:draw()
           love.graphics.setColor(unpack(color.orange))
         elseif entity.static then
           love.graphics.setColor(unpack(color.dark_green))
-        -- only the player has a speed variable
-        elseif entity.speed then
+        elseif entity.type == 'player' then
           love.graphics.setColor(unpack(color.indigo))
+        elseif entity.type == 'platform' then
+          love.graphics.setColor(unpack(color.pink))
         else
           love.graphics.setColor(unpack(color.blue))
         end
@@ -65,8 +66,8 @@ function Renderer:draw()
         entityCount = entityCount + 1
       end
 
-      love.graphics.print(x .. ',' .. y, x * self.map.zs + 5, y * self.map.zs + 5)
-      love.graphics.print(entityCount, x * self.map.zs + 5, y * self.map.zs + 20)
+      -- love.graphics.print(x .. ',' .. y, x * self.map.zs + 5, y * self.map.zs + 5)
+      love.graphics.print(entityCount, x * self.map.zs + 5, y * self.map.zs + 3)
     end
   end
 
@@ -77,6 +78,7 @@ function Renderer:draw()
   love.graphics.print('zones: ' .. self.map.zw * self.map.zh, 5, 5)
   love.graphics.print('entities: ' .. self.map.entitiesCount, 5, 20)
   love.graphics.print('updaters: ' .. self.map.updatersCount, 5, 35)
+  love.graphics.print(love.timer.getFPS(), love.graphics.getWidth() - 25, 5)
 end
 
 return Renderer

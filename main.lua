@@ -2,6 +2,7 @@
 local Map = require('map')
 local Entity = require('entity')
 local Player = require('player')
+local Platform = require('platform')
 local Renderer = require('renderer')
 
 local map, renderer
@@ -15,28 +16,32 @@ function love.load(arg)
   font = love.graphics.newImageFont('content/font.png', chars)
   love.graphics.setFont(font)
 
-  map = Map:new{ w = 800, h = 600, zs = 200 }
+  map = Map:new{ w = 600, h = 300, zs = 150 }
   renderer = Renderer:new{ map = map }
 
   -- static (non updating) walls
-  map:add(Entity:new{ x = 0, y = 0, w = 800, h = 20, static = true })
-  map:add(Entity:new{ x = 0, y = 580, w = 800, h = 20, static = true })
-  map:add(Entity:new{ x = 0, y = 20, w = 20, h = 560, static = true })
-  map:add(Entity:new{ x = 780, y = 20, w = 20, h = 560, static = true })
+  map:add(Entity:new{ x = 0, y = 0, w = 600, h = 20, static = true })
+  map:add(Entity:new{ x = 0, y = 280, w = 600, h = 20, static = true })
+  map:add(Entity:new{ x = 0, y = 20, w = 20, h = 260, static = true })
+  map:add(Entity:new{ x = 580, y = 20, w = 20, h = 260, static = true })
 
   -- boxes
-  map:add(Entity:new{ x = 200, y = 400, w = 100, h = 100 })
-  map:add(Entity:new{ x = 300, y = 275, w = 400, h = 50 })
+  map:add(Entity:new{ x = 75, y = 230, w = 200, h = 50 })
+  map:add(Entity:new{ x = 200, y = 100, w = 75, h = 20 })
 
   -- static non collider
-  map:add(Entity:new{ x = 250, y = 100, w = 50, h = 50, static = true, collider = false })
+  map:add(Entity:new{ x = 500, y = 50, w = 50, h = 50, static = true, collider = false })
 
+  -- custom entity
+  map:add(Platform:new{ x = 350, y = 100, w = 175, h = 20 })
+
+  -- custom player controlled entity
   map:add(Player:new{ x = 100, y = 100, w = 32, h = 50 })
 
   -- demonstrate getting entities in a region
-  local gets = map:get{ x = 40, y = 40, w = 600, h = 500 }
+  local entities, n = map:get{ x = 40, y = 40, w = 600, h = 500 }
 
-  for k,v in pairs(gets) do
+  for k,v in pairs(entities) do
     print(v.x, v.y, v.w, v.h)
   end
 

@@ -88,6 +88,7 @@ end
 -- Get a list of entities that intersect an object.
 -- Object needs an x,y,w,h.
 function Map:get(e1)
+  local n = 0
   local entities = {}
   local x1, y1, x2, y2 = self:region(e1)
 
@@ -96,16 +97,18 @@ function Map:get(e1)
       for k, e2 in pairs(self.zones[zx][zy]) do
         -- if not flagged for removal
         if not e2.remove and
-          -- collision check
-          e1.x < e2.x + e2.w and e2.x < e1.x + e1.w and
-          e1.y < e2.y + e2.h and e2.y < e1.y + e1.h then
+           -- collision check
+           e1.x < e2.x + e2.w and e2.x < e1.x + e1.w and
+           e1.y < e2.y + e2.h and e2.y < e1.y + e1.h then
 
-        entities[k] = e2 end
+          n = n + 1
+          entities[k] = e2
+        end
       end
     end
   end
 
-  return entities
+  return entities, n
 end
 
 -- Add an entity to zones.
@@ -128,9 +131,9 @@ end
 -- Move an entity, checking for collisions.
 -- Will either trigger the entity's move or collision response handler.
 -- Movement is done one axis at a time, X first, Y second.
-function Map:move(e, nx, ny)
-  if not self:collision(e, nx, e.y, self.X) then e:move(nx, e.y) end
-  if not self:collision(e, e.x, ny, self.Y) then e:move(e.x, ny) end
+function Map:move(e, dx, dy)
+  if not self:collision(e, dx, 0) then e:move(dx, 0) end
+  if not self:collision(e, 0, dy) then e:move(0, dy) end
 end
 
 -- Check for a collision between an entity and others in its zones.
@@ -139,30 +142,29 @@ end
 -- and supply the existing value for the other.
 -- See Map:move for an example.
 -- Returns whether a collision was made.
-function Map:collision(e1, nx, ny, axis)
+function Map:collision(e1, dx, dy)
   -- does not collide
   if not e1.collider then return false end
 
+  local checks = {}
   local collision = false
   local d = nil
-
-  -- determine the collision direction
-  if axis == self.X then
-    if nx - e1.x < 0 then d = self.LEFT else d = self.RIGHT end
-  else
-    if ny - e1.y < 0 then d = self.UP else d = self.DOWN end
-  end
 
   for k, zone in pairs(e1.zones) do
     for ek, e2 in pairs(zone) do
       -- if not the same entity and not flagged for removal
-      if e1 ~= e2 and e2.collider and not e2.remove and
-         -- collision check
-         nx < e2.x + e2.w and e2.x < nx + e1.w and
-         ny < e2.y + e2.h and e2.y < ny + e1.h then
+      if e1 ~= e2 and e2.collider and not e2.remove and not checks[e2] then
+        -- flag that we have checked this entity
+        -- as it could cross multiple zones
+        checks[e2] = true
 
-        collision = true
-        e1:collision(e2, nx, ny, d)
+        -- collision check
+        if e1.x + dx < e2.x + e2.w and e2.x < e1.x + dx + e1.w and
+           e1.y + dy < e2.y + e2.h and e2.y < e1.y + dy + e1.h then
+
+          collision = true
+          e1:collision(e2, dx, dy)
+        end
       end
     end
   end

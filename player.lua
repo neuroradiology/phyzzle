@@ -4,7 +4,7 @@ local Entity = require('entity')
 -- Inherit from the Entity table.
 local Player = Entity:new()
 
-Player.speed = 600
+Player.speed = 400
 
 function Player:init()
 end

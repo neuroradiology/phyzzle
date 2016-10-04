@@ -1,7 +1,7 @@
 
 # Phyzzle
 
-**Version 0.1**
+**Version 0.2**
 
 Simple 2D AABB arcade physics system for Lua and LÖVE.
 
@@ -23,9 +23,80 @@ Use WASD to move.
 
 ## Upcoming Features
 
-- Entity "collides" with other entities flag
-- Entity is "collidable" from other entities flag
+- Stickies: attach entities to others to move with them.
+  Great for complex entities, lifts and platforms.
 - Example PICO-8 Renderer
+
+## Usage
+
+```lua
+-- main.lua
+local Map = require('map')
+local Entity = require('entity')
+
+local map
+
+function love.load(arg)
+  -- you can override the default zone size
+  -- see map.lua for more information
+  map = Map:new{ w = 800, h = 600, zs = 200 }
+
+  -- updating (non static) entity
+  map:add(Entity:new{ x = 200, y = 400, w = 100, h = 100 })
+
+  -- static (non updating) entity
+  map:add(Entity:new{ x = 0, y = 0, w = 800, h = 20, static = true })
+
+  -- static non collider
+  -- updates but doesn't collide (good for doodads)
+  map:add(Entity:new{ x = 250, y = 100, w = 50, h = 50,
+    static = true, collider = false })
+end
+
+function love.update(dt)
+  -- detect keypresses for entity movement in the entity update
+  -- see player.lua for an example
+  map:update(dt)
+end
+
+-- example custom renderer
+function love.draw()
+  for x = 0, self.map.zw - 1 do
+    for y = 0, self.map.zh - 1 do
+
+      for k, e in pairs(self.map.zones[x][y]) do
+        -- draw entity any way you want
+        love.graphics.rectangle('line', e.x, e.y, e.w, e.h)
+      end
+    end
+  end
+end
+
+-- entity.lua
+-- entity collision and move resolution functions
+
+function Entity:collision(e2, nx, ny, direction)
+  if direction == self.map.UP then
+    self.y = e2.y + e2.h
+    self.ya = 0
+  elseif direction == self.map.DOWN then
+    self.y = e2.y - self.h
+    self.ya = 0
+  elseif direction == self.map.LEFT then
+    self.x = e2.x + e2.w
+    self.xa = 0
+  elseif direction == self.map.RIGHT then
+    self.x = e2.x - self.w
+    self.xa = 0
+  end
+end
+
+function Entity:move(nx, ny)
+  self.x = nx
+  self.y = ny
+end
+
+```
 
 ## License
 

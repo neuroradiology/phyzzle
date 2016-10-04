@@ -8,6 +8,8 @@ local Entity = {
   h = 32,
   -- does this entity update
   static = false,
+  -- does this entitu collide
+  collider = true,
   -- is the entity flagged for removal
   remove = false
 }

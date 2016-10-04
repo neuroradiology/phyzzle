@@ -140,6 +140,9 @@ end
 -- See Map:move for an example.
 -- Returns whether a collision was made.
 function Map:collision(e1, nx, ny, axis)
+  -- does not collide
+  if not e1.collider then return false end
+
   local collision = false
   local d = nil
 
@@ -153,7 +156,7 @@ function Map:collision(e1, nx, ny, axis)
   for k, zone in pairs(e1.zones) do
     for ek, e2 in pairs(zone) do
       -- if not the same entity and not flagged for removal
-      if e1 ~= e2 and not e2.remove and
+      if e1 ~= e2 and e2.collider and not e2.remove and
          -- collision check
          nx < e2.x + e2.w and e2.x < nx + e1.w and
          ny < e2.y + e2.h and e2.y < ny + e1.h then

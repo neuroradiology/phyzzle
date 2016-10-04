@@ -42,8 +42,13 @@ function Renderer:draw()
       love.graphics.setLineWidth(2)
 
       for k, entity in pairs(self.map.zones[x][y]) do
-        if entity.static then
+        if not entity.collider then
+          love.graphics.setColor(unpack(color.orange))
+        elseif entity.static then
           love.graphics.setColor(unpack(color.dark_green))
+        -- only the player has a speed variable
+        elseif entity.speed then
+          love.graphics.setColor(unpack(color.indigo))
         else
           love.graphics.setColor(unpack(color.blue))
         end

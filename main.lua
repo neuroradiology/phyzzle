@@ -19,16 +19,19 @@ function love.load(arg)
   renderer = Renderer:new{ map = map }
 
   -- static (non updating) walls
-  map:add(Entity:new { x = 0, y = 0, w = 800, h = 20, static = true })
-  map:add(Entity:new { x = 0, y = 580, w = 800, h = 20, static = true })
-  map:add(Entity:new { x = 0, y = 20, w = 20, h = 560, static = true })
-  map:add(Entity:new { x = 780, y = 20, w = 20, h = 560, static = true })
+  map:add(Entity:new{ x = 0, y = 0, w = 800, h = 20, static = true })
+  map:add(Entity:new{ x = 0, y = 580, w = 800, h = 20, static = true })
+  map:add(Entity:new{ x = 0, y = 20, w = 20, h = 560, static = true })
+  map:add(Entity:new{ x = 780, y = 20, w = 20, h = 560, static = true })
 
   -- boxes
-  map:add(Entity:new { x = 200, y = 400, w = 100, h = 100 })
-  map:add(Entity:new { x = 300, y = 275, w = 400, h = 50 })
+  map:add(Entity:new{ x = 200, y = 400, w = 100, h = 100 })
+  map:add(Entity:new{ x = 300, y = 275, w = 400, h = 50 })
 
-  map:add(Player:new { x = 100, y = 100, w = 32, h = 32 })
+  -- static non collider
+  map:add(Entity:new{ x = 250, y = 100, w = 50, h = 50, static = true, collider = false })
+
+  map:add(Player:new{ x = 100, y = 100, w = 32, h = 50 })
 
   -- demonstrate getting entities in a region
   local gets = map:get{ x = 40, y = 40, w = 600, h = 500 }

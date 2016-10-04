@@ -15,7 +15,9 @@ Great for classic platformers, shooters, prototyping, jams and learning.
 
 ## Usage
 
-Phyzzle comes with an example LÖVE app. `A` and `D` move `W` jump.
+Add `map.lua` and `entity.lua` to your project.
+
+Take a look at the example LÖVE app for example usage, `A` and `D` move `W` jump.
 
 ![](media/love.png)
 

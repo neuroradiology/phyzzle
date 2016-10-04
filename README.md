@@ -31,6 +31,7 @@ Use WASD to move.
 
 ```lua
 -- main.lua
+
 local Map = require('map')
 local Entity = require('entity')
 
@@ -49,8 +50,14 @@ function love.load(arg)
 
   -- static non collider
   -- updates but doesn't collide (good for doodads)
-  map:add(Entity:new{ x = 250, y = 100, w = 50, h = 50,
-    static = true, collider = false })
+  map:add(Entity:new{ x = 250, y = 100, w = 50, h = 50, static = true, collider = false })
+
+  -- get entities in a region
+  local gets = map:get{ x = 40, y = 40, w = 600, h = 500 }
+
+  for k,v in pairs(gets) do
+    print(v.x, v.y, v.w, v.h)
+  end
 end
 
 function love.update(dt)
@@ -61,6 +68,9 @@ end
 
 -- example custom renderer
 function love.draw()
+  -- if needed you can get zone coordinates in a region
+  -- local x1, y1, x2, y2 = map:region{ x = 40, y = 40, w = 600, h = 500 }
+
   for x = 0, self.map.zw - 1 do
     for y = 0, self.map.zh - 1 do
 
@@ -75,6 +85,14 @@ end
 -- entity.lua
 -- entity collision and move resolution functions
 
+function Player:update(dt)
+  -- check for keypresses or update via AI
+  -- example usage of moving entity in the map and checking for collisions
+  self.map:move(self, self.x + (400 * dt), self.y + (400 * dt))
+end
+
+-- acceleration variables xa, ya are zeroed on collision
+-- but you don't have to use them if you don't want
 function Entity:collision(e2, nx, ny, direction)
   if direction == self.map.UP then
     self.y = e2.y + e2.h
@@ -91,6 +109,7 @@ function Entity:collision(e2, nx, ny, direction)
   end
 end
 
+-- no collision so update the position to the new location
 function Entity:move(nx, ny)
   self.x = nx
   self.y = ny

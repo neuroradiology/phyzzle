@@ -10,7 +10,7 @@ function Player:init()
 end
 
 -- Override the Entity update function.
--- Check for key presses and attemp to move the player in the map.
+-- Check for key presses and attempt to move the player in the map.
 -- Uses default Entity collision and move response handlers.
 function Player:update(dt)
   local x = self.x

@@ -1,119 +1,35 @@
 
-# Phyzzle v1.0.0
+# Phyzzle
 
-Simple 2D AABB arcade physics system for Lua and LÖVE.
+**v2.0.0**
+
+Simple 2D AABB arcade physics system for [Lua](https://www.lua.org/) and [LÖVE](https://love2d.org/).
 
 Great for classic platformers, shooters, prototyping, jams and learning.
 
 - Simple and easy to understand code
-- Documented
+- Well documented
 - Efficient
+- Platformer example app
 - Separate Renderer
-- Core Map can be used with any Lua engine
+- Can be used with any Lua engine
 - MIT License
-- Simple :)
-
-## Example LÖVE App
-
-Use WASD to move.
-
-![](screenshots/love.png)
-
-## Upcoming Features
-
-- Stickies: attach entities to others to move with them.
-  Great for complex entities, lifts and platforms.
-- Example PICO-8 Renderer
 
 ## Usage
 
-```lua
--- main.lua
+Take a look at the documentation and example LÖVE game.
 
-local Map = require('map')
-local Entity = require('entity')
+Keys: `A` and `D` to move, `W` to jump.
 
-local map
+![](cover.gif)
 
-function love.load(arg)
-  -- you can override the default zone size
-  -- see map.lua for more information
-  map = Map:new{ w = 800, h = 600, zs = 200 }
+## Upcoming Features
 
-  -- updating (non static) entity
-  map:add(Entity:new{ x = 200, y = 400, w = 100, h = 100 })
-
-  -- static (non updating) entity
-  map:add(Entity:new{ x = 0, y = 0, w = 800, h = 20, static = true })
-
-  -- static non collider
-  -- updates but doesn't collide (good for doodads)
-  map:add(Entity:new{ x = 250, y = 100, w = 50, h = 50, static = true, collider = false })
-
-  -- get entities in a region
-  local gets = map:get{ x = 40, y = 40, w = 600, h = 500 }
-
-  for k,v in pairs(gets) do
-    print(v.x, v.y, v.w, v.h)
-  end
-end
-
-function love.update(dt)
-  -- detect keypresses for entity movement in the entity update
-  -- see player.lua for an example
-  map:update(dt)
-end
-
--- example custom renderer
-function love.draw()
-  -- if needed you can get zone coordinates in a region
-  -- local x1, y1, x2, y2 = map:region{ x = 40, y = 40, w = 600, h = 500 }
-
-  for x = 0, self.map.zw - 1 do
-    for y = 0, self.map.zh - 1 do
-
-      for k, e in pairs(self.map.zones[x][y]) do
-        -- draw entity any way you want
-        love.graphics.rectangle('line', e.x, e.y, e.w, e.h)
-      end
-    end
-  end
-end
-
--- entity.lua
--- entity collision and move resolution functions
-
-function Player:update(dt)
-  -- check for keypresses or update via AI
-  -- example usage of moving entity in the map and checking for collisions
-  self.map:move(self, self.x + (400 * dt), self.y + (400 * dt))
-end
-
--- acceleration variables xa, ya are zeroed on collision
--- but you don't have to use them if you don't want
-function Entity:collision(e2, nx, ny, direction)
-  if direction == self.map.UP then
-    self.y = e2.y + e2.h
-    self.ya = 0
-  elseif direction == self.map.DOWN then
-    self.y = e2.y - self.h
-    self.ya = 0
-  elseif direction == self.map.LEFT then
-    self.x = e2.x + e2.w
-    self.xa = 0
-  elseif direction == self.map.RIGHT then
-    self.x = e2.x - self.w
-    self.xa = 0
-  end
-end
-
--- no collision so update the position to the new location
-function Entity:move(nx, ny)
-  self.x = nx
-  self.y = ny
-end
-
-```
+- Circle collision detection (no resolution planned), useful for triggers.
+- Simple topdown example.
+- Extend both examples to showcase all possible features.
+- Create a project website.
+- Nicer LDoc CSS.
 
 ## License
 

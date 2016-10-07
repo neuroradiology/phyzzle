@@ -1,60 +1,90 @@
+--[[--
+Runs the Phyzzle platformer example app.
 
-local Map = require('map')
-local Entity = require('entity')
-local Player = require('player')
-local Renderer = require('renderer')
+The platformer example app will be extended
+and more example apps will be added in future releases.
 
-local map, renderer
+module: main
+]]
+
+local Game = require('example.platformer.game')
+
+local game = nil
 
 function love.load(arg)
-  love.graphics.setDefaultFilter('linear', 'nearest', 1)
-
-  local chars = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  chars = chars .. "0123456789.,!?-+/():;%&`'*#=[]\""
-
-  font = love.graphics.newImageFont('content/font.png', chars)
-  love.graphics.setFont(font)
-
-  map = Map:new{ w = 800, h = 600, zs = 200 }
-  renderer = Renderer:new{ map = map }
-
-  -- static (non updating) walls
-  map:add(Entity:new{ x = 0, y = 0, w = 800, h = 20, static = true })
-  map:add(Entity:new{ x = 0, y = 580, w = 800, h = 20, static = true })
-  map:add(Entity:new{ x = 0, y = 20, w = 20, h = 560, static = true })
-  map:add(Entity:new{ x = 780, y = 20, w = 20, h = 560, static = true })
-
-  -- boxes
-  map:add(Entity:new{ x = 200, y = 400, w = 100, h = 100 })
-  map:add(Entity:new{ x = 300, y = 275, w = 400, h = 50 })
-
-  -- static non collider
-  map:add(Entity:new{ x = 250, y = 100, w = 50, h = 50, static = true, collider = false })
-
-  map:add(Player:new{ x = 100, y = 100, w = 32, h = 50 })
-
-  -- demonstrate getting entities in a region
-  local gets = map:get{ x = 40, y = 40, w = 600, h = 500 }
-
-  for k,v in pairs(gets) do
-    print(v.x, v.y, v.w, v.h)
-  end
-
-  -- position the renderer for the first time
-  love.resize(love.graphics.getWidth(), love.graphics.getHeight())
-end
-
-function love.resize(w, h)
-  renderer.x = (map.w - love.graphics.getWidth()) / 2
-  renderer.y = (map.h - love.graphics.getHeight()) / 2
+  game = Game:new()
 end
 
 function love.update(dt)
-  if love.keyboard.isDown('escape') then love.event.quit() end
-
-  map:update(dt)
+  print(dt)
+  game:update(dt)
 end
 
 function love.draw()
-  renderer:draw(map)
+  game:draw()
+end
+
+--[[--
+An improved `love.run` implemenation which uses a fixed time step game update loop.
+
+Accomodates old hardware or busy games and creates deterministic simulations.
+
+Ticks 60 times a seconds on each tick:
+
+1. Accumulates delta time.
+1. Updates while accumulated time is greater than delta time.
+1. Only draw if updated.
+
+]]
+function love.run()
+  local updated = false
+	local dt = 1/60
+  local t = 0
+
+	love.math.setRandomSeed(os.time())
+  love.load(arg)
+  -- step over load time
+  love.timer.step()
+
+	while true do
+    -- reset updated flag
+    updated = false
+
+		if love.event then
+			love.event.pump()
+
+			for name, a, b, c, d, e, f in love.event.poll() do
+				if name == 'quit' then
+					if not love.quit or not love.quit() then
+						return a
+					end
+				end
+
+				love.handlers[name](a,b,c,d,e,f)
+			end
+		end
+
+		love.timer.step()
+    -- accumulate time
+		t = t + love.timer.getDelta()
+
+    -- catch up all updates
+    while t > dt do
+      -- flag that engine updated
+      updated = true
+      t = t - dt
+      love.update(dt)
+    end
+
+    -- only draw if updated this tick
+		if updated then
+			love.graphics.clear(love.graphics.getBackgroundColor())
+			love.graphics.origin()
+      love.draw()
+      love.graphics.present()
+		end
+
+    -- remove if you need more performance
+    love.timer.sleep(0.001)
+	end
 end

@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Phyzzle</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/phyzzle.Map.html">phyzzle.Map</a></li>
+  <li><a href="../modules/phyzzle.Entity.html">phyzzle.Entity</a></li>
+  <li><a href="../modules/main.html">main</a></li>
+  <li><a href="../modules/platformer.Game.html">platformer.Game</a></li>
+  <li><a href="../modules/platformer.Renderer.html">platformer.Renderer</a></li>
+  <li><a href="../modules/platformer.entity.Player.html">platformer.entity.Player</a></li>
+  <li><strong>platformer.entity.Elevator</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>platformer.entity.Elevator</code></h1>
+<p>A custom dynamic <a href="../modules/phyzzle.Entity.html#">phyzzle.Entity</a> which moves up and down
+and lifts other dynamic entities.</p>
+<p>Extends <a href="../modules/phyzzle.Entity.html#">phyzzle.Entity</a>.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#init">init ()</a></td>
+	<td class="summary">Initialize the Elevator.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#collision">collision (e2, dx, dy)</a></td>
+	<td class="summary">Override the <a href="../modules/phyzzle.Entity.html#collision">phyzzle.Entity:collision</a> function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#update">update (dt)</a></td>
+	<td class="summary">Override the Entity update function.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#type">type</a></td>
+	<td class="summary">String type value.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#travel">travel</a></td>
+	<td class="summary">Travel distance.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#speed">speed</a></td>
+	<td class="summary">Travel speed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#direction">direction</a></td>
+	<td class="summary">Travel direction.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sx">sx</a></td>
+	<td class="summary">Starting x location.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sy">sy</a></td>
+	<td class="summary">Starting y location.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "init"></a>
+    <strong>init ()</strong>
+    </dt>
+    <dd>
+    Initialize the Elevator. </p>
+
+<p>Records the starting position.</p>
+
+<p>Called automatically by <code>Entity:new</code>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "collision"></a>
+    <strong>collision (e2, dx, dy)</strong>
+    </dt>
+    <dd>
+    Override the <a href="../modules/phyzzle.Entity.html#collision">phyzzle.Entity:collision</a> function. </p>
+
+<p>If moving upward checks and the other <code>Entity</code> is dynamic
+<a href="../modules/phyzzle.Entity.html#static">phyzzle.Entity.static</a><code> = false</code> then move the entity else touch the entity.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">e2</span>
+         The other entity.
+        </li>
+        <li><span class="parameter">dx</span>
+         Change in x.
+        </li>
+        <li><span class="parameter">dy</span>
+         Change in y.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "update"></a>
+    <strong>update (dt)</strong>
+    </dt>
+    <dd>
+    Override the Entity update function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dt</span>
+        if traveled past the distance change direction
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "type"></a>
+    <strong>type</strong>
+    </dt>
+    <dd>
+    String type value.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "travel"></a>
+    <strong>travel</strong>
+    </dt>
+    <dd>
+    Travel distance.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "speed"></a>
+    <strong>speed</strong>
+    </dt>
+    <dd>
+    Travel speed.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "direction"></a>
+    <strong>direction</strong>
+    </dt>
+    <dd>
+    Travel direction.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sx"></a>
+    <strong>sx</strong>
+    </dt>
+    <dd>
+    Starting x location.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sy"></a>
+    <strong>sy</strong>
+    </dt>
+    <dd>
+    Starting y location.
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2016-10-07 18:40:17 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

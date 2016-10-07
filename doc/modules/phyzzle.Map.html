@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Phyzzle</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>phyzzle.Map</strong></li>
+  <li><a href="../modules/phyzzle.Entity.html">phyzzle.Entity</a></li>
+  <li><a href="../modules/main.html">main</a></li>
+  <li><a href="../modules/platformer.Game.html">platformer.Game</a></li>
+  <li><a href="../modules/platformer.Renderer.html">platformer.Renderer</a></li>
+  <li><a href="../modules/platformer.entity.Player.html">platformer.entity.Player</a></li>
+  <li><a href="../modules/platformer.entity.Elevator.html">platformer.entity.Elevator</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>phyzzle.Map</code></h1>
+<p>Map</p>
+<p>
+
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Release</strong>: v2.0.0</li>
+        <li><strong>License</strong>: MIT</li>
+        <li><strong>Author</strong>: <a href="http://gamedevaton.com">Gamedevaton</a>
+<a href="https://github.com/gamedevaton/phyzzle">GitHub</a>
+<a href="https://twitter.com/gamedevaton">Twitter</a></li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new (t)</a></td>
+	<td class="summary">Create a new map.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#init">init ()</a></td>
+	<td class="summary">Initialize the map by creating the zones.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#add">add (e)</a></td>
+	<td class="summary">Add an entity to the map.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get">get (t)</a></td>
+	<td class="summary">Get a list of entities that intersect a AABB.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#move">move (e, dx, dy)</a></td>
+	<td class="summary">Move an entity in the map and check for collisions.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#zone">zone (e)</a></td>
+	<td class="summary">Update <code>Entity.zones</code> base on the new location.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#update">update (dt)</a></td>
+	<td class="summary">Update all dynamic entities.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#region">region (t)</a></td>
+	<td class="summary">Get a zone region that encompasses the supplied AABB.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#w">w</a></td>
+	<td class="summary">Map width in pixels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#h">h</a></td>
+	<td class="summary">Map height in pixels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#zs">zs</a></td>
+	<td class="summary">The zone size, the width and height of a zone in pixels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#entitiesCount">entitiesCount</a></td>
+	<td class="summary">Total number of entities in the map.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#updatersCount">updatersCount</a></td>
+	<td class="summary">Total number of updating entities in the map.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new (t)</strong>
+    </dt>
+    <dd>
+    Create a new map. </p>
+
+<p>-- <a href="../modules/phyzzle.Map.html#w">w</a>,<a href="../modules/phyzzle.Map.html#h">h</a>,<a href="../modules/phyzzle.Map.html#zs">zs</a> can be overridden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+         Optional table of overrides and initial state.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        <a href="../modules/phyzzle.Map.html">Map</a> instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "init"></a>
+    <strong>init ()</strong>
+    </dt>
+    <dd>
+    Initialize the map by creating the zones. </p>
+
+<p>Called automatically by <a href="../modules/phyzzle.Map.html#new">Map:new</a>.</p>
+
+<p>Override in child maps to specify custom init functionality.
+All init functions will always be called unlike other overriden functions.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "add"></a>
+    <strong>add (e)</strong>
+    </dt>
+    <dd>
+    Add an entity to the map.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">e</span>
+         The <a href="../modules/phyzzle.Entity.html">Entity</a> to add.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The added <a href="../modules/phyzzle.Entity.html">Entity</a>.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get"></a>
+    <strong>get (t)</strong>
+    </dt>
+    <dd>
+    Get a list of entities that intersect a AABB. </p>
+
+<p>Useful for checking for collisions in specific places.</p>
+
+<p>Every <a href="../modules/phyzzle.Entity.html">Entity</a> is an AABB. A generic AABB needs an x,y,w,h.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+         AABB to check for collisions.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        <a href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> Table of entities indexed by <a href="../modules/phyzzle.Entity.html">Entity</a> table key.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "move"></a>
+    <strong>move (e, dx, dy)</strong>
+    </dt>
+    <dd>
+    Move an entity in the map and check for collisions. </p>
+
+<p>Will either trigger the entity's move or collision response handler.
+Movement is done one axis at a time, X first, Y second.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">e</span>
+         The <a href="../modules/phyzzle.Entity.html">Entity</a> to move in the map.
+        </li>
+        <li><span class="parameter">dx</span>
+         The amount to move in the X axis.
+        </li>
+        <li><span class="parameter">dy</span>
+         The amount to move in the Y axis.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "zone"></a>
+    <strong>zone (e)</strong>
+    </dt>
+    <dd>
+    Update <code>Entity.zones</code> base on the new location. </p>
+
+<p>Called automatically by <a href="../modules/phyzzle.Map.html#add">Map:add</a>.
+Needs to be called after manually setting an <a href="../modules/phyzzle.Entity.html">Entity</a> locaiton <code>x</code> or <code>y</code>.
+You only have to manually set an Entity location
+if you want to avoid collision checks.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">e</span>
+         The `Entity to zone.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "update"></a>
+    <strong>update (dt)</strong>
+    </dt>
+    <dd>
+    Update all dynamic entities. </p>
+
+<p>If an entity is flagged for removal it is removed.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dt</span>
+         Change in time or delta time.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "region"></a>
+    <strong>region (t)</strong>
+    </dt>
+    <dd>
+    Get a zone region that encompasses the supplied AABB.
+The AABB needs an x,y,w,h.</p>
+
+<p>Useful for creating viewport based renderers
+or querying sections of the map.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+         AABB zones need to cover.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        x1 The top-left zone's x location.</li>
+        <li>
+        y1 The top-left zone's y location.</li>
+        <li>
+        x1 The bottom-right zone's x location.</li>
+        <li>
+        y1 The bottom-right zone's y location.</li>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "w"></a>
+    <strong>w</strong>
+    </dt>
+    <dd>
+    Map width in pixels.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "h"></a>
+    <strong>h</strong>
+    </dt>
+    <dd>
+    Map height in pixels.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "zs"></a>
+    <strong>zs</strong>
+    </dt>
+    <dd>
+    The zone size, the width and height of a zone in pixels. </p>
+
+<p>  A map will be divided in to a grid of zones
+  to optimise collisions and renderering.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "entitiesCount"></a>
+    <strong>entitiesCount</strong>
+    </dt>
+    <dd>
+    Total number of entities in the map.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "updatersCount"></a>
+    <strong>updatersCount</strong>
+    </dt>
+    <dd>
+    Total number of updating entities in the map.
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2016-10-07 18:40:17 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

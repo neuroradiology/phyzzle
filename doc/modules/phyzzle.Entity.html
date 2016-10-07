@@ -1,0 +1,428 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Phyzzle</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/phyzzle.Map.html">phyzzle.Map</a></li>
+  <li><strong>phyzzle.Entity</strong></li>
+  <li><a href="../modules/main.html">main</a></li>
+  <li><a href="../modules/platformer.Game.html">platformer.Game</a></li>
+  <li><a href="../modules/platformer.Renderer.html">platformer.Renderer</a></li>
+  <li><a href="../modules/platformer.entity.Player.html">platformer.entity.Player</a></li>
+  <li><a href="../modules/platformer.entity.Elevator.html">platformer.entity.Elevator</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>phyzzle.Entity</code></h1>
+<p>The Phyzzle physics entity.</p>
+<p>Has a location, dimension, acceleration and various states.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new (t)</a></td>
+	<td class="summary">Create a new entity.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#init">init ()</a></td>
+	<td class="summary">Initialize the map by creating any instance specific tables.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#collision">collision (e2, dx, dy)</a></td>
+	<td class="summary">Map collision response.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#move">move (dx, dy)</a></td>
+	<td class="summary">Map move response.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#update">update (dt)</a></td>
+	<td class="summary">Update the entity.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#draw">draw ()</a></td>
+	<td class="summary">Draw the entity.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#x">x</a></td>
+	<td class="summary">x Location</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#y">y</a></td>
+	<td class="summary">y Location</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#w">w</a></td>
+	<td class="summary">Width</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#h">h</a></td>
+	<td class="summary">Height</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#xa">xa</a></td>
+	<td class="summary">x Acceleration</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ya">ya</a></td>
+	<td class="summary">y Acceleration</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#static">static</a></td>
+	<td class="summary">State indicating if the entity is static or dynamic.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#collider">collider</a></td>
+	<td class="summary">State indicating if the entity collides with others.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#remove">remove</a></td>
+	<td class="summary">State indicating if the entity is flagged for removal.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new (t)</strong>
+    </dt>
+    <dd>
+    Create a new entity. </p>
+
+<p>A table of overrides and initial state can be provided.
+<a href="../modules/phyzzle.Entity.html#x">x</a>,<a href="../modules/phyzzle.Entity.html#y">y</a>,<a href="../modules/phyzzle.Entity.html#w">w</a>,<a href="../modules/phyzzle.Entity.html#h">h</a>, <a href="../modules/phyzzle.Entity.html#static">static</a> and <a href="../modules/phyzzle.Entity.html#collider">collider</a> can be overridden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+         Optional table of overrides and initial state.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        <a href="../modules/phyzzle.Entity.html">Entity</a> instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "init"></a>
+    <strong>init ()</strong>
+    </dt>
+    <dd>
+    Initialize the map by creating any instance specific tables. </p>
+
+<p>Called automatically by <a href="../modules/phyzzle.Entity.html#new">Entity:new</a>.</p>
+
+<p>Override in child entities to specify custom init functionality.
+All init functions will always be called unlike other overriden functions.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "collision"></a>
+    <strong>collision (e2, dx, dy)</strong>
+    </dt>
+    <dd>
+    Map collision response. </p>
+
+<p>Called when this entity collides with another.
+The default collision response will touch the other entity.
+To pass over an entity override this function in a child table
+and remove the coollision response logic.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">e2</span>
+         The other entity.
+        </li>
+        <li><span class="parameter">dx</span>
+         Change in x.
+        </li>
+        <li><span class="parameter">dy</span>
+         Change in y.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "move"></a>
+    <strong>move (dx, dy)</strong>
+    </dt>
+    <dd>
+    Map move response. </p>
+
+<p>Called when this entity moves without colliding.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dx</span>
+         Change in x.
+        </li>
+        <li><span class="parameter">dy</span>
+         Change in y.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "update"></a>
+    <strong>update (dt)</strong>
+    </dt>
+    <dd>
+    Update the entity. </p>
+
+<p>For predictable results use a fixed timestep and then dt can be ignored.
+See the custom <code>love.run</code> function in <a href="../modules/main.html#">main</a>
+for a fixed time step game loop implemenation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dt</span>
+         Change in time or delta time.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "draw"></a>
+    <strong>draw ()</strong>
+    </dt>
+    <dd>
+    Draw the entity. </p>
+
+<p>The default draw function does nothing.
+Drawing can be implemented entirely in a separate renderer
+or the renderer can be implemented to call the entity's draw function.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "x"></a>
+    <strong>x</strong>
+    </dt>
+    <dd>
+    x Location
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "y"></a>
+    <strong>y</strong>
+    </dt>
+    <dd>
+    y Location
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "w"></a>
+    <strong>w</strong>
+    </dt>
+    <dd>
+    Width
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "h"></a>
+    <strong>h</strong>
+    </dt>
+    <dd>
+    Height
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "xa"></a>
+    <strong>xa</strong>
+    </dt>
+    <dd>
+    x Acceleration
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ya"></a>
+    <strong>ya</strong>
+    </dt>
+    <dd>
+    y Acceleration
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "static"></a>
+    <strong>static</strong>
+    </dt>
+    <dd>
+    State indicating if the entity is static or dynamic. </p>
+
+<p>  Only dynamic entities update.</p>
+
+<p>  Cannot be changed at runtime.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "collider"></a>
+    <strong>collider</strong>
+    </dt>
+    <dd>
+    State indicating if the entity collides with others. </p>
+
+<p>  Can be changed at runtime.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "remove"></a>
+    <strong>remove</strong>
+    </dt>
+    <dd>
+    State indicating if the entity is flagged for removal. </p>
+
+<p>  To remove an entity set <a href="../modules/phyzzle.Entity.html#remove">remove</a><code> = true</code>
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2016-10-07 18:40:17 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

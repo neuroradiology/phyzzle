@@ -8,9 +8,9 @@ function love.conf(t)
   t.window.width = 640
   t.window.height = 480
   t.window.borderless = false
-  t.window.resizable = true
-  t.window.minwidth = 320
-  t.window.minheight = 240
+  t.window.resizable = false
+  t.window.minwidth = 640
+  t.window.minheight = 480
   t.window.fullscreen = false
   t.window.fullscreentype = 'desktop'
   t.window.vsync = true

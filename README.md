@@ -1,46 +1,35 @@
 
-# Phyzzle v2.0.0
+# Phyzzle
 
-Simple 2D AABB arcade physics system for Lua and LÖVE.
+**v2.0.0**
+
+Simple 2D AABB arcade physics system for [Lua](https://www.lua.org/) and [LÖVE](https://love2d.org/).
 
 Great for classic platformers, shooters, prototyping, jams and learning.
 
 - Simple and easy to understand code
-- Documented
+- Well documented
 - Efficient
+- Platformer example app
 - Separate Renderer
-- Core Map can be used with any Lua engine
+- Can be used with any Lua engine
 - MIT License
-- Simple :)
 
 ## Usage
 
-Add `map.lua` and `entity.lua` to your project.
+Take a look at the documentation and example LÖVE game.
 
-Take a look at the example LÖVE app for example usage, `A` and `D` move `W` jump.
+Keys: `A` and `D` to move, `W` to jump.
 
-![](media/love.png)
+![](cover.gif)
 
 ## Upcoming Features
 
-- Stickies: attach entities to others to move with them.
-  Great for complex entities, lifts and platforms.
-- Circle collision detection (no resolution planned).
-  Useful for triggers.
-- Example PICO-8 Renderer
-
-## Changelog
-
-### v2.0.0 (in development)
-
-- Added changelog
-- Map:move takes change to position instead of new position
-- Improved example app with platforms
-- Improved documentation with Lua doc
-
-### v1.0.0
-
-- First release
+- Circle collision detection (no resolution planned), useful for triggers.
+- Simple topdown example.
+- Extend both examples to showcase all possible features.
+- Create a project website.
+- Nicer LDoc CSS.
 
 ## License
 
